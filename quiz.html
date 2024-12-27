@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year in Review Quiz</title>
+    
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500;700&display=swap" rel="stylesheet">
+<!--	<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Rubik+Mono+One&display=swap" rel="stylesheet">-->
+    
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #1a202c;
+        }
+		
+		.title {
+            font-family: 'Grenze Gotisch';
+        }
+        .quiz-button {
+            background-color: #3b82f6;
+            transition: all 0.2s;
+        ge}
+        .quiz-button:hover {
+            background-color: #2563eb;
+        }
+        .quiz-button:disabled {
+            opacity: 1;
+            cursor: default;
+        }
+        .quiz-button.correct {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        .quiz-button.incorrect {
+            background-color: #FFA5A5;
+            color: #1f2937;
+        }
+        .nav-bar {
+            background-color: #1e40af;
+            padding: .1rem;
+            margin-bottom: 2rem;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s;
+        }
+        .nav-link:hover {
+            background-color: #2563eb;
+        1}
+		
+        .question-number {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+        .feedback-text {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+		a {
+       	    color: #3b82f6; /* Default link color */
+            text-decoration: underline; /* Adds underline */
+        }
+        a:hover {
+            color: #6CAFF6; /* Change color on hover */
+        }
+		.calligraphy {
+		  	font-family: "Grenze Gotisch", serif;
+		  	font-weight: 500;
+		  	font-style: normal;
+		}	
+		
+    </style>
+</head>
+<!--
+<body class="p-4">
+	<h1 class="calligraphy">The New Year Times</h1>
+    <div id="root"></div>
+-->
+	
+	
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="nav-link">← &nbsp; <span class="calligraphy" style="font-size:1.5rem">T</span> &nbsp; Games</a>
+        </div>
+    </nav>
+
+    <!-- Title -->
+    <div class="max-w-6xl mx-auto text-center mb-8">
+        <h1 class="text-5xl font-bold text-gray-900" style="font-family: Georgia, serif;">The Quiz</h1>
+		<h4 class="text-gray-500">What made me smile in 2024</h4>
+    </div>
+
+    <div id="root"></div>
+	
+
+    <script type="text/babel">
+        const Quiz = () => {
+            const [currentAnswers, setCurrentAnswers] = React.useState({});
+            const [feedback, setFeedback] = React.useState({});
+            const [score, setScore] = React.useState(0);
+
+            const questions = [
+                {
+                    id: 1,
+                    question: "I briefly spoke to President Biden this year. What did he say?",
+                    choices: ["Hey doc, how are you?", "Let's go to space!", "Wait till you see what comes home from Mars!", "You ain't seen nothing yet!", "You guys did it!"],
+                    correct: "Let's go to space!",
+                    correctFeedback: "Correct! President Biden gave me a double thumbs up and said, <b>Let's go to space!</b>, just after his speech to the UN General Assembly. I was at the UN for my work on sea level rise, since 2024 marked the first UN High-Level Meeting on Sea Level Rise. <br><br> All of the other answers are quotes from his conversation with the Mars2020 team at JPL, after the rover landed on Mars in 2021, which we livestreamed for the White House.",
+                    incorrectFeedback: "President Biden gave me a double thumbs up and said, <b>Let's go to space!</b>, just after his speech to the UN General Assembly. I was at the UN General Assembly High Level week for my work on sea level rise. <br><br> All of the other answers are quotes from his conversation with the Mars2020 team at JPL, after the rover landed on Mars in 2021 (which we livestreamed for the White House.)",
+                    image: "https://live.staticflickr.com/65535/54021011488_aef7feae9c_c_d.jpg"
+                },
+				{
+                    id: 2,
+                    question: "The most stunning art I saw this year was that of Flora Yukhnovich.  Beyond visual appeal, her pieces also have great titles. What's her painting at 10 Downing St. called?",
+                    choices: ["A World of Pure Imagination", "I'll Have What She's Having", "Imagination, Life is Your Creation", "She is Beauty and She is Grace", "Warm, Wet N' Wild"],
+                    correct: "Imagination, Life is Your Creation",
+                    correctFeedback: "Correct! <b>Imagination, Life is Your Creation</b> was on display at 10 Downing St. during Rishi Sunak's tenure. I came across her paintings at the Wallace Collection, and I fell in love with the vibrancy of her art and the whimsical titles. I was amused to see the movies and song references (e.g. Barbie girl, California girls, Miss Congeniality, etc.) in such prominent places.",
+                    incorrectFeedback: "<b>Imagination, Life is Your Creation</b> was on display at 10 Downing St. during Rishi Sunak's tenure. I discovered Flora Yukhnovich's work at The Wallace Collection, and I fell in love with the vibrancy of her art and whimsical titles. I was amused to see references to movies and song lyrics (e.g. Barbie girl, California girls, Miss Congeniality, etc.) in such prominent places.",
+                    answerImage: "https://wallacecollectionshop.org/cdn/shop/files/A3-Poster-A-World-of-Pure-Imagination_1_1200x630.jpg?v=1715680335"
+                },
+                {
+                    id: 3,
+                    question: "After years, our <a href='https://www.glendaleartsandculture.org/blendedworlds'>Getty PST Art: Blended Worlds</a> exhibit is finally on display. (<i>It runs through Jan 4, so come see it!</i>) Which smell isn't featured in it?",
+                    choices: ["Clean spaceship", "First stop: 55 Cancri e", "G+T on a Saturday night", "Horse stable", "Rock garden on Mars"],
+                    correct: "First stop: 55 Cancri e",
+                    correctFeedback: "Correct! The actual smell title is - First stop: the Moon. No exoplanets smells are in the exhibit - although we originally started out with that aspiration. Instead, this part of the exhibit - Sensory Mementos - presents familiar smells (like horse stables) and imagines a time in the future when other smells in the Solar System are just as familiar to us. It is 1 of 3 <i>experiments in interplanetary imagination</i> that I worked on.<br><br> You can learn more about the evolution of the exhibit in the <a href='https://www.pbs.org/video/blended-worlds-the-fusion-of-art-science-at-jpl-nncoor/'>Artbound documentary</a>.",
+                    incorrectFeedback: "The incorrect smell is <b>First stop: 55 Cancri e</b>. However, there is a 'First stop: the Moon' smell in the exhibit. No exoplanets smells are in the exhibit - although we originally started out with that aspiration. Instead, this part of the exhibit - Sensory Mementos - presents familiar smells (like horse stables) and imagines a time in the future when other smells in the Solar System are just as familiar to us. It is 1 of 3 <i>experiments in interplanetary imagination</i> that I worked on.<br><br> You can learn more about the evolution of the exhibit in the <a href='https://www.pbs.org/video/blended-worlds-the-fusion-of-art-science-at-jpl-nncoor/'>Artbound documentary</a>.",
+					image: "imgs/art_v2.jpg"
+                },
+                {
+                    id: 4,
+                    question: "For Women's History Month, every NPR Sunday Puzzle segment featured a puzzle written by a woman. Approximately how many people sent in correct answers to <a href='https://www.npr.org/2024/03/03/1235185763/sunday-puzzle-mo]untain-ho]use-getaway'>my Sunday puzzle</a>?",
+                    choices: ["300", "500", "900", "1600", "2200"],
+                    correct: "1600",
+                    correctFeedback: "Correct! Over <b>1600</b> people sent in correct answers to the puzzle below, making it one of the most solved puzzles. Not a lot of women have the opportunity to write for the NPR Sunday Puzzle, so that was a kindness bestowed on me by a mystery hunt colleague, and I wanted the puzzle to showcase other diverse faces. <br><br> Puzzle: <i>Take the last name of a Nobel Peace Prize winner. Remove the middle three letters and duplicate the last two letters to get the first name of a different Nobel Peace Prize winner. What are those two names?</i>",
+                    incorrectFeedback: "Over <b>1600</b> people sent in correct answers to the puzzle below, making it one of the most solved puzzles. Not a lot of women have the opportunity to write for the NPR Sunday Puzzle, so that was a kindness bestowed on me by a mystery hunt colleague, and I wanted the puzzle to showcase other diverse faces. <br><br> Puzzle: <i>Take the last name of a Nobel Peace Prize winner. Remove the middle three letters and duplicate the last two letters to get the first name of a different Nobel Peace Prize winner. What are those two names?</i>",
+                    image: null
+                },
+                {
+                    id: 5,
+                    question: "How many PhDs appear in the rapper Logic's <a href='https://www.youtube.com/watch?v=dBQQSCE4Ayc'>44ever music video</a>?",
+                    choices: ["0", "1", "2", "3", "4"],
+                    correct: "2",
+                    correctFeedback: "Correct! Dr. Moogega Cooper and I cameoed in this video about things gone wrong in space, as part of a collaboration between the National Academy of Sciences and BYG Music to help science reach new audiences. You can spot us troubleshooting the spacecraft in the video.",
+                    incorrectFeedback: "There are <b>2</b> PhDs in the music video. Dr. Moogega Cooper and I cameoed in this rap video about things gone wrong in space. We were invited by the National Academy of Sciences as part of their collaboration with BYG Music, to help science reach new audiences. You can spot us troubleshooting the spacecraft in the video. ",
+                    answerImage: "imgs/logic_v3.jpg"
+                },
+                {
+                    id: 6,
+                    question: "The best part of this year's eclipse was experiencing totality with others. When is the next time a total solar eclipse will be visible from at least 4 states in the US?",
+                    choices: ["2026", "2027", "2033", "2044", "2045"],
+                    correct: "2045",
+                    correctFeedback: "Correct! To see a total solar eclipse before <b>2045</b>, you'll need to travel, unless you live in North Dakota or Montana.",
+                    incorrectFeedback: "<b>2045</b> is when we'll see the next total solar eclipse pass across a large swath of the US. To see a total solar eclipse sooner, you'll need to travel elsewhere.",
+                    image: "imgs/eclipse_v1.jpg"
+                },
+				{
+                    id: 7,
+                    question: "While I considered using Gen Z lingo in a speech to graduating high school students, which hand gesture did I settle on instead?",
+                    choices: ["Double thumbs up", "Right hand rule", "Shaka sign", "V sign", "Vulcan salute"],
+                    correct: "Vulcan salute",
+                    correctFeedback: "Correct! Even though I am not a Trekkie, I offered graduating seniors at Viewpoint School the <b>Vulcan salute</b>, which was fitting for the V in Viewpoint, its nerd reference, and the message to Live Long and Prosper.",
+                    incorrectFeedback: "Even though I am not a Trekkie, I offered graduating seniors at Viewpoint School the <b>Vulcan salute</b>, which was fitting for the V in Viewpoint, its nerd reference, and the message to Live Long and Prosper.",
+                },
+				{
+                    id: 8,
+                    question: "Kiribati is an island nation that I knew little about prior to studying it this year. All of the following facts about Kiribati are true, except for one. Which statement is false?",
+                    choices: ["Parts of Kiribati are the last in the world to ring in the New Year.", "The TI in Kiribati is pronounced SS, so Kiritimati is pronounced Christmas.", "Kiribati is nearly as wide as the continental US.", "The international date line curves around Kiribati.", "Kiribati has land in all four hemispheres."],
+                    correct: "Parts of Kiribati are the last in the world to ring in the New Year.",
+                    correctFeedback: "Correct! Kiribati is one of the <b>first</b> places to ring in the new year, with a time zone of UTC+14.",
+                    incorrectFeedback: "After a time zone update in 1994, Kiribati became one of the <b>first</b> places to ring in the new year, with a time zone of UTC+14",
+					answerImage:"https://c.tadst.com/gfx/1200x675/international-date-line.png?1"
+                },	
+				{
+                    id: 9,
+                    question: "Which country's food did I serve at my Empire Strikes Back party?",					
+                    choices: ["Australia", "India", "Malaysia", "New Zealand", "Saint Vincent and the Grenadines"],
+                    correct: "India",
+                    correctFeedback: "Correct! I served tea and chaat.  Guests brought food from all of the other countries listed.",
+                    incorrectFeedback: "I served <b>Indian</b> food,comprising of tea and chaat. Guests brought food from all of the other countries listed.",
+                    image: "imgs/party_v1.jpg"
+                },
+				{
+                    id: 10,
+                    question: "Work is never without its surprises. While the biggest surprise this year was the three rounds of mass layoffs, second place goes to a team building exercise where we had to identify <a href='https://soundcloud.com/charlie-evens/sets/music-mashups'>music mashups</a>. Which of the following mashups did my colleagues and I correctly identify?",
+                    choices: ["Beyonce x Chubby Checker", "Billy Joel x Journey","Childish Gambino x Michael Jackson", "Earth, Wind, and Fire x Post Malone", "Marvin Gaye x Nickelback"],
+                    correct: "Marvin Gaye x Nickelback",
+                    correctFeedback: "Correct. We were only able to correctly identify <a href='https://soundcloud.com/charlie-evens/question-5?in=charlie-evens/sets/music-mashups'><b>Marvin Gaye's 'Let's Get it On' remixed with Nickelback's 'Photograph'.</b></a> It has since been replayed to boost team morale...",
+                    incorrectFeedback: "We were only able to correctly identify <a href='https://soundcloud.com/charlie-evens/question-5?in=charlie-evens/sets/music-mashups'><b>Marvin Gaye's 'Let's Get it On' remixed with Nickelback's 'Photograph'</b></a>. It has since been replayed to boost team morale...",
+                    image: null
+                }				
+            ];
+
+            const handleAnswer = (questionId, choice, correct) => {
+                if (!currentAnswers[questionId]) {
+                    const isCorrect = choice === correct;
+                    setCurrentAnswers(prev => ({
+                        ...prev,
+                        [questionId]: choice
+                    }));
+                    setFeedback(prev => ({
+                        ...prev,
+                        [questionId]: isCorrect
+                    }));
+                    if (isCorrect) {
+                        setScore(prev => prev + 1);
+                    }
+                }
+            };
+
+            return (
+                <div className="max-w-2xl mx-auto space-y-8 px-4">
+                    {questions.map((q, index) => (
+                        <div key={q.id} className="space-y-4 bg-white p-6 rounded-lg shadow-sm">
+                            <div className="space-y-2">
+                                <span className="text-gray-500">{index + 1} of {questions.length}</span>
+                                <h2 className="text-lg font-medium" dangerouslySetInnerHTML={{ __html: q.question }}></h2>
+                            </div>
+
+							{q.image && (
+                                <div className="my-4">
+                                    <img 
+                                        src={q.image} 
+                                        alt="Question context" 
+                                        className="w-full rounded-lg"
+                                    />
+                                </div>
+                            )}
+							
+                            <div className="space-y-2">
+                                {q.choices.map((choice) => (
+                                    <button
+                                        key={choice}
+                                        onClick={() => handleAnswer(q.id, choice, q.correct)}
+                                        disabled={currentAnswers[q.id]}
+                                        className={`w-full text-left p-4 rounded-lg quiz-button
+                                            ${currentAnswers[q.id] === choice 
+                                                ? feedback[q.id]
+                                                    ? 'correct'
+                                                    : 'incorrect'
+                                                : 'text-white'}`}
+                                    dangerouslySetInnerHTML={{ __html: choice }}
+                                    ></button>
+                                ))}
+                            </div>
+
+                            {currentAnswers[q.id] && (
+                                <div className="space-y-4">
+                                    <p className={feedback[q.id] ? "text-green-800" : "text-gray-800"}
+									dangerouslySetInnerHTML={{
+									__html: feedback[q.id] ? q.correctFeedback : q.incorrectFeedback
+									}}
+									>
+                                    </p>
+                                    {q.answerImage && (
+                                        <div className="mt-4">
+                                            <img 
+                                                src={q.answerImage} 
+                                                alt="Answer context" 
+                                                className="w-full rounded-lg"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+
+                    {Object.keys(currentAnswers).length === questions.length && (
+                        <div className="p-4 bg-gray-50 rounded-lg">
+                            <p className="text-lg font-medium">
+                                Final Score: {score} out of {questions.length}
+                            </p>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<Quiz />, document.getElementById('root'));
+    </script>
+<!--
+				<div>
+				<p> I'm grateful for the good people in my life.  Thank you for your kindness and support throughout a year in which there have been both celebrations and challenges.</p>
+			</div>
+-->
+</body>
+</html>
